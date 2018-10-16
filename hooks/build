@@ -4,7 +4,7 @@ set -ex
 
 while read -r docker_version terraform_version compose_version;
 do
-  image=${DOCKER_REPO}:${docker_version}-tf${terraform_version}
+  image=${DOCKER_REPO}:${docker_version}
   echo "# Building image ${image}..."
 
   docker build \
