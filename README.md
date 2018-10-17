@@ -1,16 +1,29 @@
-# Docker Compose
+
+# Docker Compose Aws Tf
 
 This docker image installs docker-compose, awscli and terraform on top of the `docker` image.
 This is very useful for CI pipelines, which leverage "Docker in Docker".
 
-## Docker versions supported
+## Tags explanation
+ - **latest**
+Include the latest version of each component `docker`, `docker-compose`, `awscli` and `terraform` when the build was made.
+Actualy :
+```
+Docker version 18.06.1-ce
+docker-compose version 1.22.0
+aws-cli/1.16.35
+Terraform v0.11.8
+```
 
-There are versions based on different docker versions, e.g. `latest`, `18.06`.
-
-docker-compose matches the latest minor version available when the docker release was made. Eg, `18.06` includes docker-compose 1.22.0. The `latest` tag always includes the latest docker-compose build.
-
-AwsCli match the latest version available when the build was made.
-Terraform is actualy at the version 0.11.8
+- **other**
+The tag structure is : `dockerVersion-composeVersion-awsCliVersion-terraformVersion`
+For example the tag `18.06-1.22-1.16-0.11.8` contains :
+```
+Docker version 18.06.1-ce
+docker-compose version 1.22.0
+aws-cli/1.16.35
+Terraform v0.11.8
+```
 
 ## Usage instructions for GitLab CI
 

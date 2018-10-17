@@ -2,19 +2,15 @@
 
 set -ex
 
-i=1
-while read -r tagname docker_version compose_version awscli_version terraform_version;
+while read -r docker_version terraform_version compose_version;
 do
-  test $i -eq 1 && ((i=i+1)) && continue
-
-  image=${DOCKER_REPO}:${tagname}
+  image=${DOCKER_REPO}:${docker_version}
   echo "# Building image ${image}..."
 
   docker build \
     --build-arg DOCKER_VERSION="${docker_version}" \
     --build-arg COMPOSE_VERSION="${compose_version}" \
-    --build-arg AWSCLI_VERSION="${awscli_version}" \
     --build-arg TERRAFORM_VERSION="${terraform_version}" \
     --pull \
     -t "${image}" .
-done < VERSIONS_MATRIX
+done < DOCKER_AND_COMPOSE_VERSION_MATRIX
