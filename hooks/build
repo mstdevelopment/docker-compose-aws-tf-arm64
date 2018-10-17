@@ -2,11 +2,8 @@
 
 set -ex
 
-i=1
 while read -r tagname docker_version compose_version awscli_version terraform_version;
 do
-  test $i -eq 1 && ((i=i+1)) && continue
-
   image=${DOCKER_REPO}:${tagname}
   echo "# Building image ${image}..."
 
