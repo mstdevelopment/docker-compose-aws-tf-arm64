@@ -1,11 +1,19 @@
 #!/usr/bin/env sh
 
-set -ex
+echo "###############################"
+echo "# Pushing images"
+echo "###############################"
 
 while read -r tagname docker_version compose_version awscli_version terraform_version;
 do
   image=${DOCKER_REPO}:${tagname}
   echo "# Pushing image ${image}..."
 
-  docker image push "${image}"
+  cmd="docker image push \"${image}\""
+
+  echo "# Pushing command : ${cmd}"
+
+  ${cmd}
+
+  echo "-------------------------------"
 done < VERSIONS_MATRIX
