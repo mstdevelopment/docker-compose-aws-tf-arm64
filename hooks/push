@@ -9,7 +9,7 @@ do
   image=${DOCKER_REPO}:${tagname}
   echo "# Pushing image ${image}..."
 
-  cmd="docker image push \"${image}\""
+  cmd="docker image push "${image}""
 
   echo "# Pushing command : ${cmd}"
 
