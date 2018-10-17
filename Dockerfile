@@ -5,7 +5,7 @@ ARG COMPOSE_VERSION=
 ARG DOCKER_VERSION
 ARG TERRAFORM_VERSION
 
-RUN apk add --update --no-cache py-pip jq curl openssl git openssh
+RUN apk add --update --no-cache py-pip jq curl openssl git openssh make
 RUN pip install "docker-compose${COMPOSE_VERSION:+==}${COMPOSE_VERSION}"
 RUN pip install awscli
 RUN wget -O terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
