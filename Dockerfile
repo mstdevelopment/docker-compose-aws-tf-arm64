@@ -6,7 +6,7 @@ ARG AWSCLI_VERSION=
 ARG TERRAFORM_VERSION=
 ARG DOCKER_VERSION
 
-RUN apk add --update --no-cache py-pip jq curl openssl git openssh make
+RUN apk add --update --no-cache py-pip jq curl openssl git openssh make su-exec
 
 RUN pip install --upgrade pip
 
@@ -29,8 +29,14 @@ LABEL \
   org.opencontainers.image.vendor="BauCloud GmbH" \
   org.opencontainers.image.version="${DOCKER_VERSION} with docker-compose ${COMPOSE_VERSION}"
 
+RUN groupadd docker && useradd -d /home/docker -ms /bin/bash -g docker docker
 
 RUN docker --version && \
     docker-compose --version && \
     aws --version && \
     terraform --version
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["sh"]
