@@ -29,7 +29,7 @@ LABEL \
   org.opencontainers.image.vendor="BauCloud GmbH" \
   org.opencontainers.image.version="${DOCKER_VERSION} with docker-compose ${COMPOSE_VERSION}"
 
-RUN groupadd docker && useradd -d /home/docker -ms /bin/bash -g docker docker
+RUN addgroup -S docker && adduser -S -G docker docker
 
 RUN docker --version && \
     docker-compose --version && \
