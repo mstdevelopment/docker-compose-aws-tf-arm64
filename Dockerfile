@@ -21,12 +21,9 @@ RUN echo "${TERRAFORM_VERSION}"
 
 RUN if [ "${TERRAFORM_VERSION}" == "" ]; then \
     tfVersion=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version' | tr -d v); \
-    echo "----->${tfVersion}<<<"; \
     else \
     tfVersion="${TERRAFORM_VERSION}"; \
-    echo "=====>${tfVersion}"; \
     fi && \
-    echo "https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip" && \
     wget -O terraform.zip https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip && \
     unzip terraform.zip -d "/usr/bin" && rm terraform.zip
 
