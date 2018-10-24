@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-uid=$(stat -c %u /srv)
-gid=$(stat -c %g /srv)
-user_name="docker"
-group_name="docker"
-
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
 	set -- docker "$@"
@@ -37,14 +32,10 @@ if [ "$1" = 'dockerd' ]; then
 	sleep 3
 fi
 
-if [ $uid = 0 ] && [ $gid = 0 ]; then
+if [ "$NO_ROOT_MODE" != "1" ]; then
     exec "$@"
 else
-	sed -i -r "s/$user_name:x:[[:digit:]]+:[[:digit:]]+:/$user_name:x:$uid:$gid:/g" /etc/passwd
-	sed -i -r "s/$group_name:x:[[:digit:]]+:/$group_name:x:$gid:/g" /etc/group
-
-	user=$(grep ":x:$uid:" /etc/passwd | cut -d: -f1)
-	chown -Rf $uid:$gid /home
-
+	user="docker"
+	
 	su-exec $user "$@"
 fi

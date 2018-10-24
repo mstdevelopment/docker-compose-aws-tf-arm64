@@ -4,7 +4,7 @@ echo "###############################"
 echo "# Building images"
 echo "###############################"
 
-while read -r tagname docker_version compose_version awscli_version terraform_version;
+while read -r tagname no_root_mode docker_version compose_version awscli_version terraform_version;
 do
   image=${DOCKER_REPO}:${tagname}
   echo "# Building image ${image}..."
@@ -14,6 +14,7 @@ do
     --build-arg COMPOSE_VERSION="${compose_version}" \
     --build-arg AWSCLI_VERSION="${awscli_version}" \
     --build-arg TERRAFORM_VERSION="${terraform_version}" \
+    --build-arg NO_ROOT_MODE="${no_root_mode}" \
     --pull \
     -t "${image}" ."
 

@@ -4,7 +4,10 @@ FROM docker:${DOCKER_VERSION}
 ARG COMPOSE_VERSION=
 ARG AWSCLI_VERSION=
 ARG TERRAFORM_VERSION=
+ARG NO_ROOT_MODE
 ARG DOCKER_VERSION
+
+ENV NO_ROOT_MODE=${NO_ROOT_MODE:-0}
 
 RUN apk add --update --no-cache py-pip jq curl openssl git openssh make su-exec
 
@@ -29,7 +32,7 @@ LABEL \
   org.opencontainers.image.vendor="BauCloud GmbH" \
   org.opencontainers.image.version="${DOCKER_VERSION} with docker-compose ${COMPOSE_VERSION}"
 
-RUN addgroup -S docker && adduser -S -G docker docker
+RUN addgroup -S -g 1000 docker && adduser -S -G docker -u 1000 docker
 
 RUN docker --version && \
     docker-compose --version && \

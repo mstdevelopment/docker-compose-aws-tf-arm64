@@ -4,7 +4,7 @@ echo "###############################"
 echo "# Testing images"
 echo "###############################"
 
-while read -r tagname docker_version compose_version awscli_version terraform_version;
+while read -r tagname no_root_mode docker_version compose_version awscli_version terraform_version;
 do
   image=${DOCKER_REPO}:${tagname}
   echo "# Testing image ${image}..."
