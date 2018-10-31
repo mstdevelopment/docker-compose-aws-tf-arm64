@@ -8,22 +8,21 @@ This is very useful for CI pipelines, which leverage "Docker in Docker".
  - **latest**
 Include the latest version of each component `docker`, `docker-compose`, `awscli` and `terraform` when the build was made.
 Actualy :
-```
-Docker version 18.06.1-ce
-docker-compose version 1.22.0
-aws-cli/1.16.35
-Terraform v0.11.8
-```
+ -- `Docker version 18.06.1-ce`
+ -- `docker-compose version 1.23.0`
+ -- `aws-cli/1.16.44`
+ -- `Terraform v0.11.10`
 
 - **other**
 The tag structure is : `dockerVersion-composeVersion-awsCliVersion-terraformVersion`
 For example the tag `18.06-1.22-1.16-0.11.8` contains :
-```
-Docker version 18.06.1-ce
-docker-compose version 1.22.0
-aws-cli/1.16.35
-Terraform v0.11.8
-```
+ -- `Docker version 18.06.1-ce`
+ -- `docker-compose version 1.22.0`
+ -- `aws-cli/1.16.44`
+ -- `Terraform v0.11.8`
+
+- **xxx-noroot**
+This image is running with user "docker" (uid:1000 and gid:1000)
 
 ## Usage instructions for GitLab CI
 
