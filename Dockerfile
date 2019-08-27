@@ -9,7 +9,7 @@ ARG DOCKER_VERSION
 
 ENV NO_ROOT_MODE=${NO_ROOT_MODE:-0}
 
-RUN apk add --update --no-cache py-pip jq curl openssl git openssh make su-exec
+RUN apk add --update --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make jq curl openssl git openssh su-exec
 
 RUN pip install --upgrade pip
 
