@@ -9,7 +9,7 @@ ARG DOCKER_VERSION
 
 ENV NO_ROOT_MODE=${NO_ROOT_MODE:-0}
 
-RUN apk add --update --no-cache py-pip python3-dev libffi-dev openssl-dev gcc libc-dev make jq curl openssl git openssh su-exec bash tzdata
+RUN apk add --update --no-cache py-pip python3-dev libffi-dev openssl-dev gcc libc-dev make jq curl openssl git su-exec bash tzdata
 
 RUN pip install --upgrade pip
 
@@ -24,7 +24,7 @@ RUN if [ "${TERRAFORM_VERSION}" == "" ]; then \
     else \
     tfVersion="${TERRAFORM_VERSION}"; \
     fi && \
-    wget -O terraform.zip https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip && \
+    wget -O terraform.zip https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_arm64.zip && \
     unzip terraform.zip -d "/usr/bin" && rm terraform.zip
 
 LABEL \
